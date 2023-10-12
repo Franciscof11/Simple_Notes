@@ -1,1 +1,3 @@
-# Simple_Notes
+# simple_notes
+
+A new Flutter project.
