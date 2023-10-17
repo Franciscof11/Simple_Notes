@@ -1,9 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class Note {
   final String? title;
   final String? note;
-  final DateTime? timestamp;
+  final String? timestamp;
 
   Note({
     required this.title,
@@ -12,14 +10,12 @@ class Note {
   });
 
   factory Note.fromFirestore(
-    DocumentSnapshot<Map<String, dynamic>> snapshot,
-    SnapshotOptions? options,
+    Map<String, dynamic> map,
   ) {
-    final data = snapshot.data();
     return Note(
-      title: data?['title'],
-      note: data?['note'],
-      timestamp: data?['timestamp'],
+      title: map['title'],
+      note: map['note'],
+      timestamp: map['timestamp'],
     );
   }
 

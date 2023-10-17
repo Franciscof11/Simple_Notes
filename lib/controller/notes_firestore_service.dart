@@ -26,7 +26,7 @@ class NotesFirestoreService {
       final noteObject = Note(
         title: title,
         note: note,
-        timestamp: DateTime.now(),
+        timestamp: DateTime.now().toString(),
       ).toFirestore();
 
       await notesDb.add(noteObject);
@@ -49,6 +49,17 @@ class NotesFirestoreService {
     return notesDb.doc(noteId).update(noteAtt).then(
           (value) => print('Document updated!'),
           onError: (e) => print("Error: $e"),
+        );
+  }
+
+  // READ NOTES
+  Stream<List<Note>> readNotes() {
+    return notesDb.snapshots().map(
+          (snapshot) => snapshot.docs
+              .map((doc) => Note.fromFirestore(
+                    doc.data(),
+                  ))
+              .toList(),
         );
   }
 }

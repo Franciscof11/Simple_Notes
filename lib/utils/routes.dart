@@ -7,7 +7,7 @@ final routes = GoRouter(
   routes: [
     GoRoute(
       path: '/HomePage',
-      builder: (context, state) => const HomePage(),
+      builder: (context, state) => HomePage(),
     ),
   ],
 );

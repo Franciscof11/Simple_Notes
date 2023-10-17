@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:simple_notes/controller/notes_firestore_service.dart';
 
+import '../../../model/note.dart';
 import 'widgets/create_note_card.dart';
+import 'widgets/note_card.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
+  HomePage({super.key});
+  final notesFirestoreService = NotesFirestoreService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,9 +57,41 @@ class HomePage extends StatelessWidget {
                 )
               ],
             ),
+
             //
+            // ListView Notes
             //
-            //
+            StreamBuilder<List<Note>>(
+              stream: notesFirestoreService.readNotes(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final notes = snapshot.data!;
+                  if (notes.isEmpty) {
+                    return const Text(
+                      'No Notes',
+                      style: TextStyle(
+                        fontSize: 45,
+                        color: Colors.white,
+                      ),
+                    );
+                  } else {
+                    return MediaQuery.removePadding(
+                      context: context,
+                      removeTop: true,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: notes.length,
+                        itemBuilder: (context, index) => const NoteCard(),
+                      ),
+                    );
+                  }
+                }
+
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
+            ),
           ],
         ),
       ),
