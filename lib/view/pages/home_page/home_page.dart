@@ -65,7 +65,8 @@ class HomePage extends StatelessWidget {
               stream: notesFirestoreService.readNotes(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  final notes = snapshot.data!;
+                  List notes = snapshot.data!;
+
                   if (notes.isEmpty) {
                     return const Text(
                       'No Notes',
@@ -75,13 +76,12 @@ class HomePage extends StatelessWidget {
                       ),
                     );
                   } else {
-                    return MediaQuery.removePadding(
-                      context: context,
-                      removeTop: true,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: notes.length,
-                        itemBuilder: (context, index) => const NoteCard(),
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: notes.length,
+                      itemBuilder: (context, index) => NoteCard(
+                        title: notes[index].title ?? '',
+                        note: notes[index].note ?? '',
                       ),
                     );
                   }

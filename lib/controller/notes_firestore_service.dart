@@ -54,7 +54,7 @@ class NotesFirestoreService {
 
   // READ NOTES
   Stream<List<Note>> readNotes() {
-    return notesDb.snapshots().map(
+    return notesDb.orderBy('timestamp', descending: true).snapshots().map(
           (snapshot) => snapshot.docs
               .map((doc) => Note.fromFirestore(
                     doc.data(),

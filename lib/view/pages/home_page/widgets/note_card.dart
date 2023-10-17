@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
 class NoteCard extends StatelessWidget {
-  const NoteCard({super.key});
+  final String title;
+  final String note;
+  const NoteCard({
+    super.key,
+    required this.title,
+    required this.note,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -9,10 +15,11 @@ class NoteCard extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 8),
       child: Container(
         color: Colors.white,
-        child: const Column(
+        child: Column(
           children: [
-            Text('Alo'),
-            SizedBox(height: 25),
+            Text(title),
+            const SizedBox(height: 25),
+            Text(note),
           ],
         ),
       ),
