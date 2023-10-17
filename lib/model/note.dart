@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Note {
-  final String title;
-  final String note;
-  final DateTime timestamp;
+  final String? title;
+  final String? note;
+  final DateTime? timestamp;
 
   Note({
     required this.title,
@@ -24,6 +24,10 @@ class Note {
   }
 
   Map<String, dynamic> toFirestore() {
-    return {};
+    return {
+      if (title != null) 'title': title,
+      if (note != null) 'note': note,
+      if (timestamp != null) 'timestamp': timestamp,
+    };
   }
 }
