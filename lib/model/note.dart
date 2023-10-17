@@ -4,11 +4,12 @@ class Note {
   final String? title;
   final String? note;
   final DateTime? timestamp;
-
+  final String? noteId;
   Note({
     required this.title,
     required this.note,
     required this.timestamp,
+    required this.noteId,
   });
 
   factory Note.fromFirestore(
@@ -20,6 +21,7 @@ class Note {
       title: data?['title'],
       note: data?['note'],
       timestamp: data?['timestamp'],
+      noteId: data?['noteId'],
     );
   }
 
@@ -28,6 +30,7 @@ class Note {
       if (title != null) 'title': title,
       if (note != null) 'note': note,
       if (timestamp != null) 'timestamp': timestamp,
+      if (noteId != null) 'noteId': noteId,
     };
   }
 }

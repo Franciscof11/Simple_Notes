@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../controller/firestore_service.dart';
+import '../../../controller/firestore_service.dart';
+import 'widgets/create_note_card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -33,7 +34,12 @@ class HomePage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(right: 8, top: 8),
                   child: GestureDetector(
-                    onTap: () => firestore.updateNote('99aRML3DTASt2d5BVoab'),
+                    onTap: () => showDialog(
+                      context: context,
+                      builder: (context) => const Dialog(
+                        child: CreateNoteCard(),
+                      ),
+                    ),
                     child: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
