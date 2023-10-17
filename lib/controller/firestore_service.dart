@@ -11,10 +11,17 @@ class FirestoreService {
     'timestamp': DateTime.now(),
   };
 
+  final noteAtt = {
+    'note': 'Onix, a',
+    'title': 'Carros pra comprar',
+    'timestamp': DateTime.now(),
+  };
+
   // CREATE NOTE
   Future<void> createNote() {
     return db.collection('notes').add(note).then(
           (note) {},
+          onError: (e) => print("Error: $e"),
         );
   }
 
@@ -22,7 +29,15 @@ class FirestoreService {
   Future<void> deleteNote(String noteId) {
     return db.collection('notes').doc(noteId).delete().then(
           (doc) => print("Document deleted"),
-          onError: (e) => print("Error updating document $e"),
+          onError: (e) => print("Error: $e"),
+        );
+  }
+
+  // UPDATE NOTE
+  Future<void> updateNote(String noteId) {
+    return db.collection('notes').doc(noteId).update(noteAtt).then(
+          (value) => print('Document updated!'),
+          onError: (e) => print("Error: $e"),
         );
   }
 }

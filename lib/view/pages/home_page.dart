@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(right: 8, top: 8),
                   child: GestureDetector(
-                    onTap: () => firestore.deleteNote('iwcPLwoalGoePekPC1be'),
+                    onTap: () => firestore.updateNote('99aRML3DTASt2d5BVoab'),
                     child: Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
