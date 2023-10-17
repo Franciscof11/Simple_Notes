@@ -1,9 +1,10 @@
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 
-showToast(context, String message) {
+showToast(context, {required String message}) {
   Flushbar(
     message: message,
+    messageColor: Colors.green,
     icon: Icon(
       Icons.info_outline,
       size: 28.0,

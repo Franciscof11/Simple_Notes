@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../controller/notes_firestore_service.dart';
 import 'widgets/create_note_card.dart';
 
 class HomePage extends StatelessWidget {
@@ -9,7 +8,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final firestore = NotesFirestoreService();
     return Scaffold(
       backgroundColor: Colors.black,
       body: Padding(

@@ -1,9 +1,11 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, use_build_context_synchronously
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../model/note.dart';
+import '../view/widgets/toast.dart';
 
 final notesDb = FirebaseFirestore.instance.collection('notes');
 
@@ -16,19 +18,11 @@ class NotesFirestoreService {
 
   // CREATE NOTE
   Future<void> createNote(
-      String title, String note, BuildContext context) async {
+    String title,
+    String note,
+    BuildContext context,
+  ) async {
     try {
-      showDialog(
-        context: context,
-        barrierDismissible:
-            false, // Impede o fechamento do diálogo ao tocar fora dele
-        builder: (BuildContext context) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
-      );
-
       final noteObject = Note(
         title: title,
         note: note,
@@ -36,7 +30,10 @@ class NotesFirestoreService {
       ).toFirestore();
 
       await notesDb.add(noteObject);
-    } catch (e) {}
+    } catch (e) {
+      if (context.mounted) context.pop();
+      if (context.mounted) showToast(context, message: 'Error creating note!');
+    }
   }
 
   // DELETE NOTE

@@ -25,9 +25,9 @@ class Note {
 
   Map<String, dynamic> toFirestore() {
     return {
-      if (title != null) 'title': title,
-      if (note != null) 'note': note,
-      if (timestamp != null) 'timestamp': timestamp,
+      'title': title,
+      'note': note,
+      'timestamp': timestamp,
     };
   }
 }
