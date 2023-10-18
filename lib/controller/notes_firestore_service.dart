@@ -60,7 +60,7 @@ class NotesFirestoreService {
         );
   }
 
-  // READ NOTES
+  // READ ALL NOTES
   Stream<List<Note>> readNotes() {
     return notesDb.orderBy('timestamp', descending: true).snapshots().map(
           (snapshot) => snapshot.docs
