@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     child: Container(
-                      padding: const EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(6),
                           border: Border.all(
@@ -76,12 +76,23 @@ class HomePage extends StatelessWidget {
                       ),
                     );
                   } else {
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: notes.length,
-                      itemBuilder: (context, index) => NoteCard(
-                        title: notes[index].title ?? '',
-                        note: notes[index].note ?? '',
+                    return SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.86,
+                      child: RefreshIndicator(
+                        onRefresh: () async {
+                          return Future<void>.delayed(
+                            const Duration(seconds: 1),
+                          );
+                        },
+                        child: ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: notes.length,
+                          itemBuilder: (context, index) => NoteCard(
+                            title: notes[index].title ?? '',
+                            note: notes[index].note ?? '',
+                          ),
+                        ),
                       ),
                     );
                   }

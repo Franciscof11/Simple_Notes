@@ -29,6 +29,7 @@ class _NoteFormFieldState extends State<NoteFormField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      maxLines: null,
       controller: widget.controller,
       obscureText: obscureText,
       style: const TextStyle(fontSize: 16),
