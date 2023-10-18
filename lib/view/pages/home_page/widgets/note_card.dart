@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:simple_notes/view/pages/note_page.dart/note_page.dart';
+import 'package:simple_notes/view/pages/note_page/note_page.dart';
 
+import '../../../../model/note.dart';
 import 'expansive_button.dart';
 
 class NoteCard extends StatelessWidget {
-  final String title;
-  final String note;
-  final String noteId;
+  final Note note;
   const NoteCard({
     super.key,
-    required this.title,
     required this.note,
-    required this.noteId,
   });
 
   @override
@@ -26,7 +23,6 @@ class NoteCard extends StatelessWidget {
           PageTransition(
             type: PageTransitionType.rightToLeftWithFade,
             child: NotePage(
-              title: title,
               note: note,
             ),
           ),
@@ -43,7 +39,7 @@ class NoteCard extends StatelessWidget {
               children: [
                 const SizedBox(height: 18),
                 Text(
-                  title,
+                  note.title ?? '',
                   style: GoogleFonts.notoSans(
                     fontSize: 25,
                     fontWeight: FontWeight.bold,
@@ -51,7 +47,7 @@ class NoteCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 18),
                 Text(
-                  note,
+                  note.note ?? '',
                   textAlign: TextAlign.justify,
                   style: GoogleFonts.notoSans(
                     fontSize: 15,
@@ -64,7 +60,7 @@ class NoteCard extends StatelessWidget {
                   child: SizedBox(
                     width: 200,
                     height: 45,
-                    child: ExpandibleButton(noteId: noteId),
+                    child: ExpandibleButton(note: note),
                   ),
                 ),
                 const SizedBox(height: 10),

@@ -9,12 +9,6 @@ import '../view/widgets/toast.dart';
 final notesDb = FirebaseFirestore.instance.collection('notes');
 
 class NotesFirestoreService {
-  final noteAtt = {
-    'note': 'Onix, a',
-    'title': 'Carros pra comprar',
-    'timestamp': DateTime.now(),
-  };
-
   // CREATE NOTE
   Future<void> createNote(
     String title,
@@ -52,11 +46,15 @@ class NotesFirestoreService {
   }
 
   // UPDATE NOTE
-  Future<void> updateNote(String noteId) {
-    return notesDb.doc(noteId).update(noteAtt).then(
-          (value) => print('Document updated!'),
-          onError: (e) => print("Error: $e"),
-        );
+  Future<void> updateNote(
+      {required Note updatedNote, required Note oldnote}) async {
+    try {
+      final noteAtt = updatedNote.toFirestore();
+
+      return notesDb.doc(oldnote.noteId).update(noteAtt);
+    } catch (e) {
+      print('erro -> $e');
+    }
   }
 
   // READ ALL NOTES

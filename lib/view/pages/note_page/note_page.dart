@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
+
+import '../../../model/note.dart';
+import '../edit_note_page/edit_note_page.dart';
 
 class NotePage extends StatefulWidget {
-  final String? title;
-  final String? note;
-  const NotePage({super.key, this.title, this.note});
+  final Note? note;
+  const NotePage({super.key, this.note});
 
   @override
   State<NotePage> createState() => _NotePageState();
@@ -45,7 +48,6 @@ class _NotePageState extends State<NotePage> {
                     child: Row(
                       children: [
                         GestureDetector(
-                          onTap: () => Navigator.pop(context),
                           child: Container(
                             padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
@@ -61,7 +63,15 @@ class _NotePageState extends State<NotePage> {
                         ),
                         const SizedBox(width: 20),
                         GestureDetector(
-                          onTap: () => Navigator.pop(context),
+                          onTap: () => Navigator.push(
+                            context,
+                            PageTransition(
+                              type: PageTransitionType.rightToLeftWithFade,
+                              child: EditNotePage(
+                                note: widget.note,
+                              ),
+                            ),
+                          ),
                           child: Container(
                             padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
@@ -70,7 +80,7 @@ class _NotePageState extends State<NotePage> {
                                   color: Colors.white,
                                 )),
                             child: const Icon(
-                              Icons.color_lens_outlined,
+                              Icons.mode_edit_outline_outlined,
                               color: Colors.white,
                             ),
                           ),
@@ -101,7 +111,7 @@ class _NotePageState extends State<NotePage> {
                         children: [
                           const SizedBox(height: 18),
                           Text(
-                            widget.title ?? '',
+                            widget.note?.title ?? '',
                             style: GoogleFonts.notoSans(
                               fontSize: 35,
                               fontWeight: FontWeight.bold,
@@ -109,7 +119,7 @@ class _NotePageState extends State<NotePage> {
                           ),
                           const SizedBox(height: 18),
                           Text(
-                            widget.note ?? '',
+                            widget.note?.note ?? '',
                             textAlign: TextAlign.justify,
                             style: GoogleFonts.notoSans(
                               fontSize: 16,

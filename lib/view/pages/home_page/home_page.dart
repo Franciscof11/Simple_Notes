@@ -80,21 +80,12 @@ class HomePage extends StatelessWidget {
                     } else {
                       return SizedBox(
                         height: MediaQuery.of(context).size.height * 0.86,
-                        child: RefreshIndicator(
-                          onRefresh: () async {
-                            return Future<void>.delayed(
-                              const Duration(seconds: 1),
-                            );
-                          },
-                          child: ListView.builder(
-                            physics: const BouncingScrollPhysics(),
-                            shrinkWrap: true,
-                            itemCount: notes.length,
-                            itemBuilder: (context, index) => NoteCard(
-                              title: notes[index].title ?? '',
-                              note: notes[index].note ?? '',
-                              noteId: notes[index].noteId ?? '',
-                            ),
+                        child: ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: notes.length,
+                          itemBuilder: (context, index) => NoteCard(
+                            note: notes[index],
                           ),
                         ),
                       );

@@ -4,10 +4,10 @@ class Note {
   final String? timestamp;
   final String? noteId;
   Note({
-    required this.title,
-    required this.note,
-    required this.timestamp,
-    required this.noteId,
+    this.title,
+    this.note,
+    this.timestamp,
+    this.noteId,
   });
 
   factory Note.fromFirestore(
