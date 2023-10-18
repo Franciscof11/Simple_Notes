@@ -13,7 +13,6 @@ dependencies:
   firebase_core: ^2.17.0
   flutter:
     sdk: flutter
-  go_router: ^11.1.4
   google_fonts: ^6.1.0
   page_transition: ^2.1.0
 

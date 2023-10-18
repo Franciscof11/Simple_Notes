@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class NotePage extends StatefulWidget {
@@ -22,7 +21,7 @@ class _NotePageState extends State<NotePage> {
             Padding(
               padding: const EdgeInsets.only(right: 8, top: 45, left: 22),
               child: GestureDetector(
-                onTap: () => context.pop(),
+                onTap: () => Navigator.pop(context),
                 child: Container(
                   padding: const EdgeInsets.all(10),
                   decoration: BoxDecoration(

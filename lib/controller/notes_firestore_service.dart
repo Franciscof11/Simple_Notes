@@ -2,7 +2,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../model/note.dart';
 import '../view/widgets/toast.dart';
@@ -33,7 +32,7 @@ class NotesFirestoreService {
 
       await docNote.set(noteObject);
     } catch (e) {
-      if (context.mounted) context.pop();
+      if (context.mounted) Navigator.pop(context);
       if (context.mounted) showToast(context, message: 'Error creating note!');
     }
   }
@@ -45,7 +44,7 @@ class NotesFirestoreService {
   ) async {
     try {
       notesDb.doc(noteId).delete();
-      if (context.mounted) context.pop();
+      if (context.mounted) Navigator.pop(context);
       if (context.mounted) showToast(context, message: 'Note Deleted!');
     } catch (e) {
       if (context.mounted) showToast(context, message: 'Error deleting note!');

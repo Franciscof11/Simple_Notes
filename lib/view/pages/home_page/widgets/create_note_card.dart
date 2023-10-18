@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 import '../../../../controller/notes_firestore_service.dart';
 import '../../../widgets/toast.dart';
@@ -45,7 +44,7 @@ class CreateNoteCard extends StatelessWidget {
                           context,
                         );
                       }
-                      context.pop();
+                      Navigator.pop(context);
 
                       showToast(context, message: 'Note Created!');
                     },
