@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class NotePage extends StatefulWidget {
-  const NotePage({super.key});
+  final String? title;
+  final String? note;
+  const NotePage({super.key, this.title, this.note});
 
   @override
   State<NotePage> createState() => _NotePageState();
@@ -45,8 +47,9 @@ class _NotePageState extends State<NotePage> {
                   borderRadius: BorderRadius.circular(14),
                 ),
                 width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height,
+                height: MediaQuery.of(context).size.height * 0.8,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 22),
@@ -55,18 +58,18 @@ class _NotePageState extends State<NotePage> {
                         children: [
                           const SizedBox(height: 18),
                           Text(
-                            'Titulo',
+                            widget.title ?? '',
                             style: GoogleFonts.notoSans(
-                              fontSize: 25,
+                              fontSize: 35,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                           const SizedBox(height: 18),
                           Text(
-                            'Notinhas',
+                            widget.note ?? '',
                             textAlign: TextAlign.justify,
                             style: GoogleFonts.notoSans(
-                              fontSize: 15,
+                              fontSize: 16,
                               fontWeight: FontWeight.w400,
                             ),
                           ),

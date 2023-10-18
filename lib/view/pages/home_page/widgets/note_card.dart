@@ -25,7 +25,10 @@ class NoteCard extends StatelessWidget {
           context,
           PageTransition(
             type: PageTransitionType.rightToLeftWithFade,
-            child: const NotePage(),
+            child: NotePage(
+              title: title,
+              note: note,
+            ),
           ),
         ), //
         child: Container(
