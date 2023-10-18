@@ -1,8 +1,10 @@
 import 'package:expandable_menu/expandable_menu.dart';
 import 'package:flutter/material.dart';
+import 'package:simple_notes/controller/notes_firestore_service.dart';
 
 class ExpandibleButton extends StatelessWidget {
-  const ExpandibleButton({super.key});
+  final String noteId;
+  const ExpandibleButton({super.key, required this.noteId});
 
   @override
   Widget build(BuildContext context) {
@@ -32,20 +34,25 @@ class ExpandibleButton extends StatelessWidget {
               backgroundColor: Colors.yellow[300]!,
               iconColor: Colors.black,
               itemContainerColor: Colors.white.withOpacity(0.5),
-              items: const [
-                Icon(
+              items: [
+                const Icon(
                   Icons.mode_edit_outline_outlined,
                   color: Colors.black,
                 ),
-                Icon(
+                const Icon(
                   Icons.color_lens_outlined,
                   color: Colors.black,
                 ),
-                Icon(
-                  Icons.delete_outline_outlined,
-                  color: Colors.black,
+                GestureDetector(
+                  onTap: () {
+                    deleteNote(context, noteId);
+                  },
+                  child: const Icon(
+                    Icons.delete_outline_outlined,
+                    color: Colors.black,
+                  ),
                 ),
-                Icon(
+                const Icon(
                   Icons.share_rounded,
                   color: Colors.black,
                 ),
@@ -54,4 +61,32 @@ class ExpandibleButton extends StatelessWidget {
       ],
     );
   }
+}
+
+final notesFirestoreService = NotesFirestoreService();
+
+void deleteNote(BuildContext context, String noteId) async {
+  showDialog(
+    context: context,
+    builder: (context) => Dialog(
+      child: Column(
+        children: [
+          const Text('Deseja deletar essa nota?'),
+          const SizedBox(height: 30),
+          Row(
+            children: [
+              ElevatedButton(
+                onPressed: () async {
+                  notesFirestoreService.deleteNote(noteId, context);
+                },
+                child: const Text('Sim'),
+              ),
+              const SizedBox(width: 30),
+              ElevatedButton(onPressed: () {}, child: const Text('Não')),
+            ],
+          )
+        ],
+      ),
+    ),
+  );
 }

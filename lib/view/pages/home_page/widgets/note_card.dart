@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../widgets/expansive_button.dart';
+import 'expansive_button.dart';
 
 class NoteCard extends StatelessWidget {
   final String title;
   final String note;
+  final String noteId;
   const NoteCard({
     super.key,
     required this.title,
     required this.note,
+    required this.noteId,
   });
 
   @override
@@ -46,12 +48,12 @@ class NoteCard extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 15),
-                const Align(
+                Align(
                   alignment: Alignment.centerRight,
                   child: SizedBox(
                     width: 200,
                     height: 45,
-                    child: ExpandibleButton(),
+                    child: ExpandibleButton(noteId: noteId),
                   ),
                 ),
                 const SizedBox(height: 10),

@@ -15,95 +15,98 @@ class HomePage extends StatelessWidget {
       backgroundColor: Colors.black,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
-        child: Column(
-          children: [
-            const SizedBox(height: 40),
-            //
-            // App Bar
-            //
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Notes',
-                  style: GoogleFonts.notoSans(
-                    fontSize: 45,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.white,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 8, top: 8),
-                  child: GestureDetector(
-                    onTap: () => showDialog(
-                      context: context,
-                      builder: (context) => const Dialog(
-                        child: CreateNoteCard(),
-                      ),
-                    ),
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          border: Border.all(
-                            color: Colors.white,
-                          )),
-                      child: const Icon(
-                        Icons.add,
-                        color: Colors.white,
-                      ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(height: 40),
+              //
+              // App Bar
+              //
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Notes',
+                    style: GoogleFonts.notoSans(
+                      fontSize: 45,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white,
                     ),
                   ),
-                )
-              ],
-            ),
-
-            //
-            // ListView Notes
-            //
-            StreamBuilder<List<Note>>(
-              stream: notesFirestoreService.readNotes(),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  List notes = snapshot.data!;
-
-                  if (notes.isEmpty) {
-                    return const Text(
-                      'No Notes',
-                      style: TextStyle(
-                        fontSize: 45,
-                        color: Colors.white,
-                      ),
-                    );
-                  } else {
-                    return SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.86,
-                      child: RefreshIndicator(
-                        onRefresh: () async {
-                          return Future<void>.delayed(
-                            const Duration(seconds: 1),
-                          );
-                        },
-                        child: ListView.builder(
-                          physics: const BouncingScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: notes.length,
-                          itemBuilder: (context, index) => NoteCard(
-                            title: notes[index].title ?? '',
-                            note: notes[index].note ?? '',
-                          ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 8, top: 8),
+                    child: GestureDetector(
+                      onTap: () => showDialog(
+                        context: context,
+                        builder: (context) => const Dialog(
+                          child: CreateNoteCard(),
                         ),
                       ),
-                    );
-                  }
-                }
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6),
+                            border: Border.all(
+                              color: Colors.white,
+                            )),
+                        child: const Icon(
+                          Icons.add,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
 
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              },
-            ),
-          ],
+              //
+              // ListView Notes
+              //
+              StreamBuilder<List<Note>>(
+                stream: notesFirestoreService.readNotes(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    List<Note> notes = snapshot.data!;
+
+                    if (notes.isEmpty) {
+                      return const Text(
+                        'No Notes',
+                        style: TextStyle(
+                          fontSize: 45,
+                          color: Colors.white,
+                        ),
+                      );
+                    } else {
+                      return SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.86,
+                        child: RefreshIndicator(
+                          onRefresh: () async {
+                            return Future<void>.delayed(
+                              const Duration(seconds: 1),
+                            );
+                          },
+                          child: ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            shrinkWrap: true,
+                            itemCount: notes.length,
+                            itemBuilder: (context, index) => NoteCard(
+                              title: notes[index].title ?? '',
+                              note: notes[index].note ?? '',
+                              noteId: notes[index].noteId ?? '',
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+                  }
+
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );

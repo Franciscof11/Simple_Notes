@@ -23,13 +23,15 @@ class NotesFirestoreService {
     BuildContext context,
   ) async {
     try {
+      final docNote = notesDb.doc();
       final noteObject = Note(
+        noteId: docNote.id,
         title: title,
         note: note,
         timestamp: DateTime.now().toString(),
       ).toFirestore();
 
-      await notesDb.add(noteObject);
+      await docNote.set(noteObject);
     } catch (e) {
       if (context.mounted) context.pop();
       if (context.mounted) showToast(context, message: 'Error creating note!');
@@ -37,11 +39,17 @@ class NotesFirestoreService {
   }
 
   // DELETE NOTE
-  Future<void> deleteNote(String noteId) {
-    return notesDb.doc(noteId).delete().then(
-          (doc) => print("Document deleted"),
-          onError: (e) => print("Error: $e"),
-        );
+  Future<void> deleteNote(
+    String noteId,
+    BuildContext context,
+  ) async {
+    try {
+      notesDb.doc(noteId).delete();
+      if (context.mounted) context.pop();
+      if (context.mounted) showToast(context, message: 'Note Deleted!');
+    } catch (e) {
+      if (context.mounted) showToast(context, message: 'Error deleting note!');
+    }
   }
 
   // UPDATE NOTE
@@ -56,9 +64,11 @@ class NotesFirestoreService {
   Stream<List<Note>> readNotes() {
     return notesDb.orderBy('timestamp', descending: true).snapshots().map(
           (snapshot) => snapshot.docs
-              .map((doc) => Note.fromFirestore(
-                    doc.data(),
-                  ))
+              .map(
+                (doc) => Note.fromFirestore(
+                  doc.data(),
+                ),
+              )
               .toList(),
         );
   }
