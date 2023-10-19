@@ -58,7 +58,7 @@ class NoteCard extends StatelessWidget {
                 Align(
                   alignment: Alignment.bottomRight,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 280),
+                    padding: const EdgeInsets.only(left: 272),
                     child: GestureDetector(
                       onTap: () => showModalBottomSheet(
                         context: context,
@@ -79,7 +79,7 @@ class NoteCard extends StatelessWidget {
                           ),
                         ),
                       ),
-                      child: const Icon(Icons.more_vert),
+                      child: const Icon(Icons.more_vert, size: 30),
                     ),
                   ),
                 ),

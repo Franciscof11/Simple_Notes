@@ -20,6 +20,7 @@ class _CreateNotePageState extends State<CreateNotePage> {
   final noteController = TextEditingController();
   final formKey = GlobalKey<FormState>();
   String bgColor = 'grey';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
