@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:simple_notes/controller/notes_firestore_service.dart';
 
 import '../../../model/note.dart';
-import 'widgets/create_note_card.dart';
+import '../create_note_page/create_note_page.dart';
 import 'widgets/note_card.dart';
 
 class HomePage extends StatelessWidget {
@@ -34,29 +35,59 @@ class HomePage extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 8, top: 8),
-                    child: GestureDetector(
-                      onTap: () => showDialog(
-                        context: context,
-                        builder: (context) => const Dialog(
-                          child: CreateNoteCard(),
-                        ),
-                      ),
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(6),
-                            border: Border.all(
+                  Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8, top: 8),
+                        child: GestureDetector(
+                          onTap: () => Navigator.push(
+                            context,
+                            PageTransition(
+                              type: PageTransitionType.rightToLeftWithFade,
+                              child: const CreateNotePage(),
+                            ),
+                          ),
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6),
+                                border: Border.all(
+                                  color: Colors.white,
+                                )),
+                            child: const Icon(
+                              Icons.grid_view_rounded,
                               color: Colors.white,
-                            )),
-                        child: const Icon(
-                          Icons.add,
-                          color: Colors.white,
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  )
+                      const SizedBox(width: 5),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8, top: 8),
+                        child: GestureDetector(
+                          onTap: () => Navigator.push(
+                            context,
+                            PageTransition(
+                              type: PageTransitionType.rightToLeftWithFade,
+                              child: const CreateNotePage(),
+                            ),
+                          ),
+                          child: Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6),
+                                border: Border.all(
+                                  color: Colors.white,
+                                )),
+                            child: const Icon(
+                              Icons.add,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
 
