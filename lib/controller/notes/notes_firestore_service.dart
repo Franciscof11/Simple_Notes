@@ -3,8 +3,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../model/note.dart';
-import '../view/widgets/toast.dart';
+import '../../model/note.dart';
+import '../../view/common_widgets/toast.dart';
 
 final notesDb = FirebaseFirestore.instance.collection('notes');
 

@@ -3,7 +3,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:simple_notes/model/note.dart';
 import 'package:simple_notes/view/pages/edit_note_page/edit_note_page.dart';
 
-import '../../../controller/notes_firestore_service.dart';
+import '../../../controller/notes/notes_firestore_service.dart';
 
 class ExpansiveButton extends StatefulWidget {
   final Note note;

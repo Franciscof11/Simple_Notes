@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simple_notes/view/pages/home_page/widgets/note_card.dart';
 
-import '../../../controller/notes_firestore_service.dart';
+import '../../../controller/notes/notes_firestore_service.dart';
 import '../../../model/note.dart';
 import 'create_text_form_field.dart';
 

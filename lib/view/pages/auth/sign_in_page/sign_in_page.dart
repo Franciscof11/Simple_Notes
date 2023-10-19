@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:simple_notes/view/widgets/remove_glow_effect.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:simple_notes/view/common_widgets/remove_glow_effect.dart';
+import 'package:simple_notes/view/pages/home_page/home_page.dart';
 
 import 'widgets/apple_sign_in_button.dart';
 import 'widgets/email_text_field.dart';
@@ -75,7 +77,18 @@ class _SignInPageState extends State<SignInPage> {
                           const SizedBox(height: 35),
                           ElevatedButton(
                             onPressed: () {
-                              formKey.currentState?.validate();
+                              final formValid =
+                                  formKey.currentState?.validate() ?? false;
+                              if (formValid) {
+                                Navigator.push(
+                                  context,
+                                  PageTransition(
+                                    type:
+                                        PageTransitionType.rightToLeftWithFade,
+                                    child: HomePage(),
+                                  ),
+                                );
+                              }
                             },
                             style: ElevatedButton.styleFrom(
                               minimumSize: const Size(double.infinity, 80),

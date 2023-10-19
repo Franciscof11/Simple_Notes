@@ -1,9 +1,11 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:simple_notes/view/pages/note_page/note_page.dart';
 
-import '../../../../controller/notes_firestore_service.dart';
+import '../../../../controller/notes/notes_firestore_service.dart';
 import '../../../../model/note.dart';
 import '../expansive_button.dart';
 

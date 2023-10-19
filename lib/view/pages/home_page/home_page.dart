@@ -3,8 +3,8 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:simple_notes/controller/notes_firestore_service.dart';
 
+import '../../../controller/notes/notes_firestore_service.dart';
 import '../../../model/note.dart';
 import '../create_note_page/create_note_page.dart';
 import 'widgets/note_card.dart';

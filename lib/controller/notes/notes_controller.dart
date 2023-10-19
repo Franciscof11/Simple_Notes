@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../model/note.dart';
+import '../../model/note.dart';
 import 'notes_firestore_service.dart';
 
 final notesFirestoreService = NotesFirestoreService();

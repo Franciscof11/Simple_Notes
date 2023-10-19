@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:simple_notes/controller/notes_controller.dart';
 import 'package:simple_notes/view/pages/home_page/widgets/note_card.dart';
 import 'package:simple_notes/view/pages/note_page/note_page.dart';
 
+import '../../../controller/notes/notes_controller.dart';
 import '../../../model/note.dart';
 import 'widgets/edit_text_form_field.dart';
 
