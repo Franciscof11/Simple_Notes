@@ -57,30 +57,27 @@ class NoteCard extends StatelessWidget {
                 ),
                 Align(
                   alignment: Alignment.bottomRight,
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 272),
-                    child: GestureDetector(
-                      onTap: () => showModalBottomSheet(
-                        context: context,
-                        builder: (context) => SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.12,
-                          child: Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  notesFirestoreService.deleteNote(
-                                      note.noteId!, context);
-                                },
-                                child: const Icon(
-                                  Icons.delete_outline_outlined,
-                                ),
+                  child: GestureDetector(
+                    onTap: () => showModalBottomSheet(
+                      context: context,
+                      builder: (context) => SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.12,
+                        child: Row(
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                notesFirestoreService.deleteNote(
+                                    note.noteId!, context);
+                              },
+                              child: const Icon(
+                                Icons.delete_outline_outlined,
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
-                      child: const Icon(Icons.more_vert, size: 30),
                     ),
+                    child: const Icon(Icons.more_vert, size: 30),
                   ),
                 ),
                 const SizedBox(height: 16),
