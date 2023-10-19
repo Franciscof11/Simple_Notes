@@ -4,7 +4,6 @@ import 'package:page_transition/page_transition.dart';
 import 'package:simple_notes/view/pages/note_page/note_page.dart';
 
 import '../../../../model/note.dart';
-import 'expansive_button.dart';
 
 class NoteCard extends StatelessWidget {
   final Note note;
@@ -30,7 +29,7 @@ class NoteCard extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: Colors.white,
+            color: selectColor(note.cardColor!),
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 22),
@@ -54,16 +53,7 @@ class NoteCard extends StatelessWidget {
                     fontWeight: FontWeight.w400,
                   ),
                 ),
-                const SizedBox(height: 15),
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: SizedBox(
-                    width: 200,
-                    height: 45,
-                    child: ExpandibleButton(note: note),
-                  ),
-                ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 30),
               ],
             ),
           ),
@@ -71,4 +61,22 @@ class NoteCard extends StatelessWidget {
       ),
     );
   }
+}
+
+Color? selectColor(String color) {
+  switch (color) {
+    case 'yellow':
+      return const Color.fromARGB(255, 247, 236, 152);
+    case 'red':
+      return const Color.fromARGB(255, 231, 99, 99);
+    case 'green':
+      return const Color.fromARGB(255, 144, 245, 141);
+    case 'blue':
+      return const Color.fromARGB(255, 132, 225, 231);
+    case 'purple':
+      return const Color.fromARGB(255, 160, 113, 204);
+    case 'white':
+      return Colors.white;
+  }
+  return null;
 }

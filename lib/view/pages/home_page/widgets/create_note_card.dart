@@ -41,6 +41,7 @@ class CreateNoteCard extends StatelessWidget {
                         notesFirestoreService.createNote(
                           titleNoteController.text,
                           noteTextController.text,
+                          'white',
                           context,
                         );
                       }

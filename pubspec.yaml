@@ -10,7 +10,6 @@ dependencies:
   another_flushbar: ^1.12.30
   cloud_firestore: ^4.9.3
   device_preview: ^1.1.0
-  expandable_menu: ^0.0.5
   firebase_core: ^2.17.0
   flutter:
     sdk: flutter

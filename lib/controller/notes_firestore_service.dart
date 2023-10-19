@@ -13,6 +13,7 @@ class NotesFirestoreService {
   Future<void> createNote(
     String title,
     String note,
+    String color,
     BuildContext context,
   ) async {
     try {
@@ -21,6 +22,7 @@ class NotesFirestoreService {
         noteId: docNote.id,
         title: title,
         note: note,
+        cardColor: color,
         timestamp: DateTime.now().toString(),
       ).toFirestore();
 
