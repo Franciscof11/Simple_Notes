@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:simple_notes/view/pages/home_page/widgets/note_card.dart';
 
 import '../../../model/note.dart';
 import '../edit_note_page/edit_note_page.dart';
@@ -17,7 +18,7 @@ class _NotePageState extends State<NotePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: selectColor(widget.note!.cardColor.toString()),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
