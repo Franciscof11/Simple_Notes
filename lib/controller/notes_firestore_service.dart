@@ -40,7 +40,6 @@ class NotesFirestoreService {
   ) async {
     try {
       notesDb.doc(noteId).delete();
-      if (context.mounted) Navigator.pop(context);
       if (context.mounted) showToast(context, message: 'Note Deleted!');
     } catch (e) {
       if (context.mounted) showToast(context, message: 'Error deleting note!');

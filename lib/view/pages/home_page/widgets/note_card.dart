@@ -5,6 +5,7 @@ import 'package:simple_notes/view/pages/note_page/note_page.dart';
 
 import '../../../../controller/notes_firestore_service.dart';
 import '../../../../model/note.dart';
+import '../expansive_button.dart';
 
 class NoteCard extends StatelessWidget {
   final Note note;
@@ -57,28 +58,7 @@ class NoteCard extends StatelessWidget {
                 ),
                 Align(
                   alignment: Alignment.bottomRight,
-                  child: GestureDetector(
-                    onTap: () => showModalBottomSheet(
-                      context: context,
-                      builder: (context) => SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.12,
-                        child: Row(
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                notesFirestoreService.deleteNote(
-                                    note.noteId!, context);
-                              },
-                              child: const Icon(
-                                Icons.delete_outline_outlined,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    child: const Icon(Icons.more_vert, size: 30),
-                  ),
+                  child: ExpansiveButton(note: note),
                 ),
                 const SizedBox(height: 16),
               ],
