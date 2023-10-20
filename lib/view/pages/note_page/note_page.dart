@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:simple_notes/controller/notes/text_to_speech.dart';
-import 'package:simple_notes/view/pages/home_page/home_page.dart';
 import 'package:simple_notes/view/pages/home_page/widgets/note_card.dart';
 
 import '../../../model/note.dart';
-import '../edit_note_page/edit_note_page.dart';
 
 class NotePage extends StatefulWidget {
   final Note? note;
@@ -17,6 +14,7 @@ class NotePage extends StatefulWidget {
 }
 
 class _NotePageState extends State<NotePage> {
+  final speech = Speech();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,13 +30,9 @@ class _NotePageState extends State<NotePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      PageTransition(
-                        type: PageTransitionType.rightToLeftWithFade,
-                        child: HomePage(),
-                      ),
-                    ),
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
                     child: Container(
                       padding: const EdgeInsets.all(10),
                       decoration: BoxDecoration(
@@ -58,7 +52,15 @@ class _NotePageState extends State<NotePage> {
                       children: [
                         GestureDetector(
                           onTap: () {
-                            textToSpeech(widget.note!.note);
+                            setState(() {
+                              if (speech.ttsState == TtsState.stopped) {
+                                speech.textToSpeech(
+                                  widget.note!.note,
+                                );
+                              } else if (speech.ttsState == TtsState.playing) {
+                                speech.stop();
+                              }
+                            });
                           },
                           child: Container(
                             padding: const EdgeInsets.all(10),
@@ -67,15 +69,18 @@ class _NotePageState extends State<NotePage> {
                                 border: Border.all(
                                   color: Colors.white,
                                 )),
-                            child: const Icon(
-                              Icons.spatial_audio_off_outlined,
+                            child: Icon(
+                              speech.ttsState == TtsState.stopped
+                                  ? Icons.spatial_audio_off_outlined
+                                  : Icons.stop,
                               color: Colors.white,
                             ),
                           ),
                         ),
                         const SizedBox(width: 20),
                         GestureDetector(
-                          onTap: () => Navigator.push(
+                          onTap: () => print(speech.ttsState),
+                          /*     onTap: () => Navigator.push(
                             context,
                             PageTransition(
                               type: PageTransitionType.rightToLeftWithFade,
@@ -83,7 +88,7 @@ class _NotePageState extends State<NotePage> {
                                 note: widget.note,
                               ),
                             ),
-                          ),
+                          ), */
                           child: Container(
                             padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
