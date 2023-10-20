@@ -27,7 +27,7 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,
-      initialRoute: '/SignInPage',
+      initialRoute: '/AuthController',
       routes: routes,
       debugShowCheckedModeBanner: false,
     );
