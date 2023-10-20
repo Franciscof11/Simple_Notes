@@ -4,6 +4,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:simple_notes/view/common_widgets/remove_glow_effect.dart';
 import 'package:simple_notes/view/pages/home_page/home_page.dart';
 
+import 'sign_up_page.dart';
 import 'widgets/apple_sign_in_button.dart';
 import 'widgets/email_text_field.dart';
 import 'widgets/google_sign_in_button.dart';
@@ -47,7 +48,7 @@ class _SignInPageState extends State<SignInPage> {
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
-                          const SizedBox(height: 35),
+                          const SizedBox(height: 20),
                           //
                           const Icon(
                             Icons.sticky_note_2_outlined,
@@ -79,12 +80,12 @@ class _SignInPageState extends State<SignInPage> {
                             onPressed: () {
                               final formValid =
                                   formKey.currentState?.validate() ?? false;
+
                               if (formValid) {
                                 Navigator.push(
                                   context,
                                   PageTransition(
-                                    type:
-                                        PageTransitionType.rightToLeftWithFade,
+                                    type: PageTransitionType.rightToLeft,
                                     child: HomePage(),
                                   ),
                                 );
@@ -107,7 +108,13 @@ class _SignInPageState extends State<SignInPage> {
                           ),
                           const SizedBox(height: 15),
                           GestureDetector(
-                            onTap: () => (),
+                            onTap: () => Navigator.push(
+                              context,
+                              PageTransition(
+                                type: PageTransitionType.rightToLeft,
+                                child: const SignUpPage(),
+                              ),
+                            ),
                             child: Text(
                               "Sign Up",
                               style: GoogleFonts.rubik(
