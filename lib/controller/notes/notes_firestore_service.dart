@@ -1,12 +1,15 @@
 // ignore_for_file: avoid_print, use_build_context_synchronously
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../model/note.dart';
 import '../../view/common_widgets/toast.dart';
 
 final notesDb = FirebaseFirestore.instance.collection('notes');
+final user = FirebaseAuth.instance.currentUser;
+final userId = user!.uid;
 
 class NotesFirestoreService {
   // CREATE NOTE
@@ -14,6 +17,7 @@ class NotesFirestoreService {
     String title,
     String note,
     String color,
+    String userId,
     BuildContext context,
   ) async {
     try {
@@ -23,6 +27,7 @@ class NotesFirestoreService {
         title: title,
         note: note,
         cardColor: color,
+        userId: userId,
         timestamp: DateTime.now().toString(),
       ).toFirestore();
 
@@ -60,7 +65,11 @@ class NotesFirestoreService {
 
   // READ ALL NOTES
   Stream<List<Note>> readNotes() {
-    return notesDb.orderBy('timestamp', descending: true).snapshots().map(
+    return notesDb
+        .where('userId', isEqualTo: userId)
+        .orderBy('timestamp', descending: true)
+        .snapshots()
+        .map(
           (snapshot) => snapshot.docs
               .map(
                 (doc) => Note.fromFirestore(

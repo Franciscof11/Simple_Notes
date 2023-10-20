@@ -128,8 +128,11 @@ class HomePage extends StatelessWidget {
                   }
                 }
 
-                return const Center(
-                  child: CircularProgressIndicator(),
+                return const Column(
+                  children: [
+                    SizedBox(height: 300),
+                    CircularProgressIndicator(),
+                  ],
                 );
               },
             ),

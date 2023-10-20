@@ -243,6 +243,7 @@ class _CreateNotePageState extends State<CreateNotePage> {
                                 titleController.text,
                                 noteController.text,
                                 bgColor,
+                                userId,
                                 context,
                               );
                             }

@@ -4,12 +4,14 @@ class Note {
   final String? timestamp;
   final String? noteId;
   final String? cardColor;
+  final String? userId;
   Note({
     this.title,
     this.note,
     this.timestamp,
     this.noteId,
     this.cardColor,
+    this.userId,
   });
 
   factory Note.fromFirestore(
@@ -21,6 +23,7 @@ class Note {
       timestamp: map['timestamp'],
       noteId: map['noteId'],
       cardColor: map['cardColor'],
+      userId: map['userId'],
     );
   }
 
@@ -31,6 +34,7 @@ class Note {
       'timestamp': timestamp,
       'noteId': noteId,
       'cardColor': cardColor,
+      'userId': userId,
     };
   }
 }
