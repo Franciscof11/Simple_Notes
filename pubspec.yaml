@@ -10,12 +10,14 @@ dependencies:
   another_flushbar: ^1.12.30
   cloud_firestore: ^4.9.3
   device_preview: ^1.1.0
+  firebase_auth: ^4.11.1
   firebase_core: ^2.17.0
   flutter:
     sdk: flutter
   flutter_staggered_animations: ^1.1.1
   flutter_svg: ^2.0.7
   google_fonts: ^6.1.0
+  google_sign_in: ^6.1.5
   page_transition: ^2.1.0
 
 dev_dependencies:
