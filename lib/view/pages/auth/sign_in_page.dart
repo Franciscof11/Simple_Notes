@@ -4,6 +4,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:simple_notes/view/common_widgets/remove_glow_effect.dart';
 import 'package:simple_notes/view/pages/home_page/home_page.dart';
 
+import '../../../controller/auth/sign_in.dart';
 import 'sign_up_page.dart';
 import 'widgets/apple_sign_in_button.dart';
 import 'widgets/email_text_field.dart';
@@ -78,18 +79,19 @@ class _SignInPageState extends State<SignInPage> {
                           const SizedBox(height: 35),
                           ElevatedButton(
                             onPressed: () {
-                              final formValid =
-                                  formKey.currentState?.validate() ?? false;
-
-                              if (formValid) {
-                                Navigator.push(
-                                  context,
-                                  PageTransition(
-                                    type: PageTransitionType.rightToLeft,
-                                    child: HomePage(),
-                                  ),
-                                );
-                              }
+                              formKey.currentState?.validate();
+                              signIn(
+                                email: emailController.text,
+                                password: passwordController.text,
+                                context: context,
+                              );
+                              Navigator.push(
+                                context,
+                                PageTransition(
+                                  type: PageTransitionType.rightToLeft,
+                                  child: HomePage(),
+                                ),
+                              );
                             },
                             style: ElevatedButton.styleFrom(
                               minimumSize: const Size(double.infinity, 80),

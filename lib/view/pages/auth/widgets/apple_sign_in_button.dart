@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../controller/auth/apple_sign_in.dart';
+
 class AplleSignInButton extends StatelessWidget {
   final String urlImage;
 
@@ -11,7 +13,7 @@ class AplleSignInButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => {},
+      onTap: () => signInWithApple(),
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(16),

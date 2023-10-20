@@ -4,6 +4,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:simple_notes/view/common_widgets/remove_glow_effect.dart';
 import 'package:simple_notes/view/pages/auth/widgets/email_text_field.dart';
 
+import '../../../controller/auth/sign_up.dart';
 import 'sign_in_page.dart';
 import 'widgets/apple_sign_in_button.dart';
 import 'widgets/google_sign_in_button.dart';
@@ -86,52 +87,54 @@ class _SignUpPageState extends State<SignUpPage> {
                           const SizedBox(height: 30),
                           ElevatedButton(
                             onPressed: () async {
-                              final formValid =
-                                  formsignUpKey.currentState?.validate() ??
-                                      false;
-                              if (formValid) {
-                                if (passwordSignUpController.text ==
-                                    confirmPassword.text) {
-                                } else {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) => Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 60, vertical: 240),
-                                      child: Card(
-                                        child: Center(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              const Text(
-                                                'Passwords dont match!',
+                              formsignUpKey.currentState?.validate();
+
+                              if (passwordSignUpController.text ==
+                                  confirmPassword.text) {
+                                createUser(
+                                  email: emailSignUpController.text,
+                                  password: passwordSignUpController.text,
+                                  context: context,
+                                );
+                              } else {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 60, vertical: 240),
+                                    child: Card(
+                                      child: Center(
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            const Text(
+                                              'Passwords dont match!',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                              ),
+                                            ),
+                                            const SizedBox(height: 40),
+                                            ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors.black,
+                                              ),
+                                              onPressed: () =>
+                                                  Navigator.pop(context),
+                                              child: const Text(
+                                                'OK',
                                                 style: TextStyle(
                                                   fontSize: 18,
+                                                  color: Colors.white,
                                                 ),
                                               ),
-                                              const SizedBox(height: 40),
-                                              ElevatedButton(
-                                                style: ElevatedButton.styleFrom(
-                                                  backgroundColor: Colors.black,
-                                                ),
-                                                onPressed: () =>
-                                                    Navigator.pop(context),
-                                                child: const Text(
-                                                  'OK',
-                                                  style: TextStyle(
-                                                    fontSize: 18,
-                                                    color: Colors.white,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ),
-                                  );
-                                }
+                                  ),
+                                );
                               }
                             },
                             style: ElevatedButton.styleFrom(

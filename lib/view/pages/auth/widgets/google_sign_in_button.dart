@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../../controller/auth/google_sign_in.dart';
+
 class GoogleSignInButton extends StatefulWidget {
   final String urlImage;
 
@@ -17,6 +19,7 @@ class _GoogleSignInButtonState extends State<GoogleSignInButton> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        signInWithGoogle();
         const CircularProgressIndicator();
         setState(() {});
       },
