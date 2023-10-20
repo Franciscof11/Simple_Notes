@@ -16,6 +16,7 @@ dependencies:
     sdk: flutter
   flutter_staggered_animations: ^1.1.1
   flutter_svg: ^2.0.7
+  flutter_tts: ^3.8.3
   google_fonts: ^6.1.0
   google_sign_in: ^6.1.5
   page_transition: ^2.1.0

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:simple_notes/controller/notes/text_to_speech.dart';
 import 'package:simple_notes/view/pages/home_page/home_page.dart';
 import 'package:simple_notes/view/pages/home_page/widgets/note_card.dart';
 
@@ -56,6 +57,9 @@ class _NotePageState extends State<NotePage> {
                     child: Row(
                       children: [
                         GestureDetector(
+                          onTap: () {
+                            textToSpeech(widget.note!.note);
+                          },
                           child: Container(
                             padding: const EdgeInsets.all(10),
                             decoration: BoxDecoration(
