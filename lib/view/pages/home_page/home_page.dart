@@ -3,6 +3,7 @@ import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:simple_notes/view/pages/user_page/user_page.dart';
 
 import '../../../controller/notes/notes_firestore_service.dart';
 import '../../../model/note.dart';
@@ -37,26 +38,52 @@ class HomePage extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 8, top: 8),
-                  child: GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      PageTransition(
-                        type: PageTransitionType.rightToLeftWithFade,
-                        child: const CreateNotePage(),
-                      ),
-                    ),
-                    child: Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          border: Border.all(
+                  child: Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          PageTransition(
+                            type: PageTransitionType.rightToLeftWithFade,
+                            child: const CreateNotePage(),
+                          ),
+                        ),
+                        child: Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(6),
+                              border: Border.all(
+                                color: Colors.white,
+                              )),
+                          child: const Icon(
+                            Icons.add,
                             color: Colors.white,
-                          )),
-                      child: const Icon(
-                        Icons.add,
-                        color: Colors.white,
+                          ),
+                        ),
                       ),
-                    ),
+                      const SizedBox(width: 20),
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          PageTransition(
+                            type: PageTransitionType.rightToLeftWithFade,
+                            child: const UserPage(),
+                          ),
+                        ),
+                        child: Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(6),
+                              border: Border.all(
+                                color: Colors.white,
+                              )),
+                          child: const Icon(
+                            Icons.person_outline_rounded,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
