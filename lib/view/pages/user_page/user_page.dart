@@ -23,60 +23,50 @@ class _UserPageState extends State<UserPage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 45),
-            //
-            // App Bar
-            //
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Profile',
+                style: GoogleFonts.notoSans(
+                  fontSize: 45,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+            const SizedBox(height: 65),
+            Stack(
               children: [
-                Text(
-                  'Profile',
-                  style: GoogleFonts.notoSans(
-                    fontSize: 45,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.white,
+                const SizedBox(
+                  width: 200,
+                  height: 200,
+                  child: CircleAvatar(
+                    foregroundImage: NetworkImage(
+                      'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1966.png',
+                    ),
+                    backgroundColor: Colors.white,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 8, top: 8),
-                  child: Row(
-                    children: [
-                      GestureDetector(
-                        onTap: () => Navigator.push(
-                          context,
-                          PageTransition(
-                            type: PageTransitionType.rightToLeftWithFade,
-                            child: const UserPage(),
-                          ),
-                        ),
-                        child: Container(
-                          padding: const EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(6),
-                              border: Border.all(
-                                color: Colors.white,
-                              )),
-                          child: const Icon(
-                            Icons.more_vert,
-                            color: Colors.white,
-                          ),
-                        ),
+                Positioned(
+                  bottom: 0,
+                  right: 20,
+                  child: GestureDetector(
+                    onTap: () => print('alo'),
+                    child: Container(
+                      padding: const EdgeInsets.all(7),
+                      decoration: const BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: Colors.white,
                       ),
-                    ],
+                      child: const Icon(
+                        Icons.edit,
+                        color: Colors.black,
+                        size: 22,
+                      ),
+                    ),
                   ),
                 ),
               ],
-            ),
-            const SizedBox(height: 65),
-            const SizedBox(
-              width: 200,
-              height: 200,
-              child: CircleAvatar(
-                foregroundImage: NetworkImage(
-                  'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1966.png',
-                ),
-                backgroundColor: Colors.white,
-              ),
             ),
             const SizedBox(height: 30),
             Text(
