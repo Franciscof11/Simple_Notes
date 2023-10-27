@@ -6,6 +6,7 @@ import '../view/pages/auth/sign_in_page.dart';
 import '../view/pages/auth/sign_up_page.dart';
 import '../view/pages/create_note_page/create_note_page.dart';
 import '../view/pages/edit_note_page/edit_note_page.dart';
+import '../view/pages/user_page/user_page.dart';
 
 final routes = {
   '/AuthController': (context) => const AuthController(),
@@ -15,4 +16,5 @@ final routes = {
   '/NotePage': (context) => const NotePage(),
   '/EditNotePage': (context) => const EditNotePage(),
   '/CreateNotePage': (context) => const CreateNotePage(),
+  '/UserPage': (context) => const UserPage(),
 };
