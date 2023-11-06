@@ -3,11 +3,10 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:simple_notes/view/common_widgets/remove_glow_effect.dart';
 import 'package:simple_notes/view/pages/auth/widgets/email_text_field.dart';
+import 'package:simple_notes/view/pages/user_page/user_page.dart';
 
 import '../../../controller/auth/sign_up.dart';
 import 'sign_in_page.dart';
-import 'widgets/apple_sign_in_button.dart';
-import 'widgets/google_sign_in_button.dart';
 import 'widgets/password_text_field.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -22,11 +21,10 @@ class _SignUpPageState extends State<SignUpPage> {
   final emailSignUpController = TextEditingController();
   final passwordSignUpController = TextEditingController();
   final confirmPassword = TextEditingController();
-
+  final userImage = true;
   get type => null;
   @override
   Widget build(BuildContext context) {
-    double widthDevice = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.grey[300],
       body: Stack(
@@ -63,9 +61,49 @@ class _SignUpPageState extends State<SignUpPage> {
                             "Let's create an account for you",
                             style: GoogleFonts.rubik(
                               color: Colors.grey[600],
-                              fontSize: 16,
+                              fontSize: 18,
                               fontWeight: FontWeight.bold,
                             ),
+                          ),
+                          const SizedBox(height: 26),
+                          Stack(
+                            children: [
+                              SizedBox(
+                                width: 150,
+                                height: 150,
+                                child: CircleAvatar(
+                                  foregroundImage: userImage
+                                      ? const NetworkImage(
+                                          'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1966.png',
+                                        )
+                                      : const NetworkImage(
+                                          'https://cdn.icon-icons.com/icons2/2406/PNG/512/user_account_icon_145918.png',
+                                        ),
+                                  backgroundColor: Colors.grey[350],
+                                ),
+                              ),
+                              Positioned(
+                                bottom: 0,
+                                right: 20,
+                                child: GestureDetector(
+                                  onTap: () {
+                                    pickPhoto(context);
+                                  },
+                                  child: Container(
+                                    padding: const EdgeInsets.all(7),
+                                    decoration: const BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Colors.white,
+                                    ),
+                                    child: const Icon(
+                                      Icons.photo_camera_outlined,
+                                      color: Colors.black,
+                                      size: 22,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                           const SizedBox(height: 26),
                           EmailSignInTextField(
@@ -170,47 +208,6 @@ class _SignUpPageState extends State<SignUpPage> {
                             ),
                           ),
                           const SizedBox(height: 40),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              SizedBox(
-                                width: widthDevice <= 380 ? 50 : 70,
-                                child: Divider(
-                                  color: Colors.grey[600],
-                                  thickness: 0.5,
-                                ),
-                              ),
-                              Text(
-                                "Or continue with",
-                                style: GoogleFonts.rubik(
-                                  color: Colors.grey[600],
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.normal,
-                                ),
-                              ),
-                              SizedBox(
-                                width: widthDevice <= 380 ? 50 : 70,
-                                child: Divider(
-                                  color: Colors.grey[600],
-                                  thickness: 0.5,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 30),
-                          const Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              GoogleSignInButton(
-                                urlImage: 'assets/google.png',
-                              ),
-                              SizedBox(width: 24),
-                              AplleSignInButton(
-                                urlImage: 'assets/apple.png',
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 35),
                         ],
                       ),
                     ),
