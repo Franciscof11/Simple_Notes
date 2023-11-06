@@ -1,9 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:simple_notes/view/common_widgets/remove_glow_effect.dart';
 import 'package:simple_notes/view/pages/auth/widgets/email_text_field.dart';
-import 'package:simple_notes/view/pages/user_page/user_page.dart';
 
 import '../../../controller/auth/sign_up.dart';
 import 'sign_in_page.dart';
@@ -17,12 +19,25 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  ImagePicker imagePicker = ImagePicker();
   final formsignUpKey = GlobalKey<FormState>();
   final emailSignUpController = TextEditingController();
   final passwordSignUpController = TextEditingController();
   final confirmPassword = TextEditingController();
-  final userImage = true;
-  get type => null;
+
+  File? imageFile;
+
+  pickImage({required ImageSource source}) async {
+    final pickedFile = await imagePicker.pickImage(source: source);
+
+    if (pickedFile != null) {
+      setState(() {
+        imageFile = File(pickedFile.path);
+      });
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -35,7 +50,7 @@ class _SignUpPageState extends State<SignUpPage> {
             height: MediaQuery.of(context).size.height,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 60, horizontal: 25),
+            padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 25),
             child: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
@@ -56,7 +71,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             size: 100,
                           ),
                           //
-                          const SizedBox(height: 26),
+                          const SizedBox(height: 20),
                           Text(
                             "Let's create an account for you",
                             style: GoogleFonts.rubik(
@@ -72,13 +87,11 @@ class _SignUpPageState extends State<SignUpPage> {
                                 width: 150,
                                 height: 150,
                                 child: CircleAvatar(
-                                  foregroundImage: userImage
-                                      ? const NetworkImage(
-                                          'https://a.espncdn.com/combiner/i?img=/i/headshots/nba/players/full/1966.png',
-                                        )
+                                  backgroundImage: imageFile != null
+                                      ? FileImage(imageFile!)
                                       : const NetworkImage(
                                           'https://cdn.icon-icons.com/icons2/2406/PNG/512/user_account_icon_145918.png',
-                                        ),
+                                        ) as ImageProvider,
                                   backgroundColor: Colors.grey[350],
                                 ),
                               ),
@@ -86,9 +99,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                 bottom: 0,
                                 right: 20,
                                 child: GestureDetector(
-                                  onTap: () {
-                                    pickPhoto(context);
-                                  },
+                                  onTap: () => showPhotoOptions(),
                                   child: Container(
                                     padding: const EdgeInsets.all(7),
                                     decoration: const BoxDecoration(
@@ -207,7 +218,7 @@ class _SignUpPageState extends State<SignUpPage> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 40),
+                          const SizedBox(height: 50),
                         ],
                       ),
                     ),
@@ -217,6 +228,95 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  void showPhotoOptions() {
+    showModalBottomSheet(
+      shape: const ContinuousRectangleBorder(
+          borderRadius: BorderRadius.only(
+        topRight: Radius.circular(70),
+        topLeft: Radius.circular(70),
+      )),
+      context: context,
+      builder: (context) => SizedBox(
+        height: MediaQuery.of(context).size.height * 0.25,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 35, vertical: 20),
+          child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Column(
+              children: [
+                const SizedBox(height: 10),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                    pickImage(source: ImageSource.gallery);
+                  },
+                  child: Row(
+                    children: [
+                      const Icon(Icons.photo_library_outlined, size: 30),
+                      const SizedBox(width: 12),
+                      Text(
+                        'Gallery',
+                        style: GoogleFonts.notoSans(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.grey[700],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 30),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                    pickImage(source: ImageSource.camera);
+                  },
+                  child: Row(
+                    children: [
+                      const Icon(Icons.camera_alt_outlined, size: 30),
+                      const SizedBox(width: 12),
+                      Text(
+                        'Camera',
+                        style: GoogleFonts.notoSans(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.grey[700],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 30),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pop(context);
+                    setState(() {
+                      imageFile = null;
+                    });
+                  },
+                  child: Row(
+                    children: [
+                      const Icon(Icons.delete_outline, size: 30),
+                      const SizedBox(width: 12),
+                      Text(
+                        'Remove',
+                        style: GoogleFonts.notoSans(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.grey[700],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
