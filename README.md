@@ -1,3 +1,3 @@
-# simple_notes
+# Writ_On
 
 A new Flutter project.
